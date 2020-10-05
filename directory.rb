@@ -16,12 +16,24 @@ students = [
 # Set variable
 student_count = 11
 
-# Puts Names
-puts "The students of Villains Academy"
-puts "-------------"
-students.each do |name|
-  puts name
+# Header Method
+def print_header
+  puts "The students of Villains Academy"
+  puts "-------------"
+end
+
+# Footer Method
+def print(students)
+  students.each do |name|
+    puts name
+  end
 end
 
 # Print
-puts "Overall, we have #{student_count} great students"
+def print_footer
+  puts "Overall, we have #{student_count} great students"
+end
+
+print_header
+print(students)
+print_footer
