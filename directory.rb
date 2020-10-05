@@ -165,8 +165,30 @@ def print(students)
     # End Loop Hash
     end
 
+    # Correct Check
+    puts "Would you like to make changes? y/n".center(50)
+    ans = gets.chomp
+
+    # Correct?
+    if ans.downcase == "y"
+      changes(students)
+    end
+
     # Puts the line
     puts line.center(50)
+  end
+end
+
+def changes(students)
+
+  # Get the name reference
+  puts "Enter name reference.".center(50, '~')
+  name = gets.chomp
+
+  students.each do |hash|
+    if hash[:name] == name
+      puts hash
+    end
   end
 end
 
