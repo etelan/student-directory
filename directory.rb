@@ -4,15 +4,87 @@ def print_header
   puts "-------------"
 end
 
+# Input Students Method
+def input_students
+
+  # Make Array
+  students = []
+
+  # Start Loop
+  while true
+
+    # Ask for input
+    puts "Input the student name."
+    puts "To finish, hit return twice"
+
+    # Get input
+    name = gets.chomp
+
+    # If they enter a name, save the name
+    if name != ""
+
+      # Cohort
+      puts "Input the student cohort."
+      cohort = gets.chomp
+
+      # Hobby
+      puts "Input the student hobby."
+      hobby = gets.chomp
+
+      # Country
+      puts "Input the student country."
+      country = gets.chomp
+
+      # Height
+      puts "Input the student height."
+      height = gets.chomp
+
+      # Make Hash
+      hash = {
+        :name => name,
+        :cohort => cohort,
+        :hobby => hobby,
+        :country => country,
+        :height => height
+      }
+
+      # Push
+      students.push(hash)
+
+    else
+      break
+    end
+
+  # End Loop
+  end
+
+  # Return Array
+  return students
+end
+
 # Student Normal
 def print(students)
-  students.each do |name|
+
+  # Loop Over Array
+  students.each do |hash|
 
     # Get the number
-    num = students.find_index(name) + 1
+    num = students.find_index(hash) + 1
+
+    # Start String
+    line = num.to_s + ". "
+
+    # Loop Over Hash
+    hash.each do |key, value|
+
+      # Add to line
+      line = line + key.to_s + ": " + value.to_s + ", "
+
+    # End Loop Hash
+    end
 
     # Puts the line
-    puts num.to_s + ". name: " + name + " cohort: november"
+    puts line
   end
 end
 
@@ -82,35 +154,6 @@ def print_length_filter(students)
   end
 end
 
-# Input Students Method
-def input_students
-
-  # Make Array
-  students = []
-
-  # Start Loop
-  while true
-
-    # Ask for input
-    puts "Input the student name."
-    puts "To finish, hit return twice"
-
-    # Get input
-    name = gets.chomp
-
-    if name != ""
-      students.push(name)
-    else
-      break
-    end
-
-  # End Loop
-  end
-
-  # Return Array
-  return students
-end
-
 
 # Print
 def print_footer(students)
@@ -120,6 +163,6 @@ end
 
 # Run our code
 array = input_students
-print_header
-print_while(array)
-print_footer(array)
+#print_header
+print(array)
+#print_footer(array)
