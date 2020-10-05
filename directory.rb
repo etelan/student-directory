@@ -283,7 +283,20 @@ end
 # Print
 def print_footer(students)
   student_count = students.length
-  puts "Overall, we have #{student_count} great students".center(50)
+
+  # Grammar Plural
+  if student_count > 1
+    puts "Overall, we have #{student_count} great students".center(50)
+
+  # Grammer None
+elsif student_count == 0
+    puts "Overall, we have no students".center(50)
+
+  # Grammar Singular
+  else
+    puts "Overall, we have #{student_count} great student".center(50)
+  end
+
 end
 
 # Run our code
