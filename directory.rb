@@ -179,19 +179,42 @@ def print(students)
   end
 end
 
+# DEFINE CHANGE
 def changes(students)
 
   # Get the name reference
   puts "Enter name reference.".center(50, '~')
   name = gets.chomp
 
+  # Loop to find our hash
   students.each do |hash|
     if hash[:name] == name
-      puts hash
+
+      # Display them the menu, grab return
+      select = edit_menu
+
     end
   end
 end
 
+def edit_menu
+
+  while true
+    # Print a nice menu
+    puts "Submit a number for the change".center(50)
+    puts "1. Name"
+    puts "2. Cohort"
+    puts "3. Hobbies"
+    puts "4. Country"
+    puts "5. Height"
+    selection = gets.chomp.to_i
+
+    # return
+    if (selection <= 5) and (selection > 0)
+      return selection
+    end
+  end
+end
 
 # Print
 def print_footer(students)
