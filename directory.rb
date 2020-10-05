@@ -1,18 +1,3 @@
-# Make Array
-students = [
-  {name: "Dr. Hannibal Lecter", cohort: :november},
-  {name: "Darth Vader", cohort: :november},
-  {name: "Nurse Ratched", cohort: :november},
-  {name: "Michael Corleone", cohort: :november},
-  {name: "Alex DeLarge", cohort: :november},
-  {name: "The Wicked Witch of the West", cohort: :november},
-  {name: "Terminator", cohort: :november},
-  {name: "Freddy Krueger", cohort: :november},
-  {name: "The Joker", cohort: :november},
-  {name: "Joffrey Baratheon", cohort: :november},
-  {name: "Norman Bates", cohort: :november}
-]
-
 # Set variable
 student_count = 11
 
@@ -24,16 +9,50 @@ end
 
 # Footer Method
 def print(students)
-  students.each do |line|
-    puts " #{line[:name]} (#{line[:cohort]} cohort) "
+  students.each do |name|
+    puts name
   end
 end
 
+# Input Students Method
+def input_students
+
+  # Make Array
+  students = []
+
+  # Start Loop
+  while true
+
+    # Ask for input
+    puts "Input the student name."
+    puts "To finish, hit return twice"
+
+    # Get input
+    name = gets.chomp
+
+    if name != ""
+      students.push(name)
+    else
+      break
+    end
+
+  # End Loop
+  end
+
+  # Return Array
+  return students
+end
+
+
+
 # Print
-def print_footer
+def print_footer(students)
+  student_count = students.length
   puts "Overall, we have #{student_count} great students"
 end
 
+
+array = input_students
 print_header
-print(students)
-print_footer
+print(array)
+print_footer(array)
