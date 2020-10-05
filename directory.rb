@@ -27,9 +27,18 @@ def input_students
       puts "Input the student cohort."
       cohort = gets.chomp
 
-      # Hobby
-      puts "Input the student hobby."
-      hobby = gets.chomp
+      # Hobby num
+      puts "Input the number of student hobbies."
+      hobbies_num = gets.chomp.to_i
+
+      # Hobby array
+      hobby = []
+
+      (1..hobbies_num).each do |i|
+        # Hobby Value
+        puts "Input the hobby value."
+        hobby.push(gets.chomp)
+      end
 
       # Country
       puts "Input the student country."
@@ -78,7 +87,11 @@ def print(students)
     hash.each do |key, value|
 
       # Add to line
-      line = line + key.to_s + ": " + value.to_s + ", "
+      if value.is_a? String
+        line = line + key.to_s + ": " + value.to_s + ", "
+      else
+        line = line + key.to_s + ": " + value.join(", ") + ", "
+      end
 
     # End Loop Hash
     end
@@ -163,6 +176,6 @@ end
 
 # Run our code
 array = input_students
-#print_header
+print_header
 print(array)
-#print_footer(array)
+print_footer(array)
