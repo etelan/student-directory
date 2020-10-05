@@ -178,7 +178,7 @@ def print_footer(students)
 end
 
 # Run our code
-array = input_students
 print_header
+array = input_students
 print(array)
 print_footer(array)
