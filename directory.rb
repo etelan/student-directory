@@ -1,7 +1,76 @@
+=begin
+# Student While
+def print_while(students)
+
+  # Counter
+  max_counter = students.length
+
+
+  while max_counter > 0
+
+    # Lower Counter
+    max_counter -= 1
+
+    # Get the number
+    num = students.length - max_counter
+
+    # Puts the line
+    puts num.to_s + ". name: " + students.reverse[max_counter] + " cohort: november"
+  end
+end
+
+# Student First Character Filter
+def print_char_filter(students)
+
+  # Get char to search for
+  puts "Input character to search for."
+  char = gets.chomp
+
+  # Start Loop
+  students.each do |name|
+
+    # Char?
+    if name[0] = char
+      # Get the number
+      num = students.find_index(name) + 1
+
+      # Puts the line
+      puts num.to_s + ". name: " + name + " cohort: november"
+    end
+
+  # End Loop
+  end
+end
+
+
+# Student Length Filter
+def print_length_filter(students)
+
+  # Get char to search for
+  puts "Input length to be less than or equal to."
+  char = gets.chomp.to_i
+
+  # Start Loop
+  students.each do |name|
+
+    # Char?
+    if name.length <= char
+      # Get the number
+      num = students.find_index(name) + 1
+
+      # Puts the line
+      puts num.to_s + ". name: " + name + " cohort: november"
+    end
+
+  # End Loop
+  end
+end
+=end
+
 # Header Method
 def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
+  puts "The students of Villains Academy".center(50, '~')
+  puts "-------------".center(50)
 end
 
 # Input Students Method
@@ -14,8 +83,8 @@ def input_students
   while true
 
     # Ask for input
-    puts "Input the student name."
-    puts "To finish, hit return twice"
+    puts "Input the student name.".center(50)
+    puts "To finish, hit return twice".center(50)
 
     # Get input
     name = gets.chomp
@@ -24,11 +93,11 @@ def input_students
     if name != ""
 
       # Cohort
-      puts "Input the student cohort."
+      puts "Input the student cohort.".center(50)
       cohort = gets.chomp
 
       # Hobby num
-      puts "Input the number of student hobbies."
+      puts "Input the number of student hobbies.".center(50)
       hobbies_num = gets.chomp.to_i
 
       # Hobby array
@@ -36,16 +105,16 @@ def input_students
 
       (1..hobbies_num).each do |i|
         # Hobby Value
-        puts "Input the hobby value."
+        puts "Input the hobby value.".center(50)
         hobby.push(gets.chomp)
       end
 
       # Country
-      puts "Input the student country."
+      puts "Input the student country.".center(50)
       country = gets.chomp
 
       # Height
-      puts "Input the student height."
+      puts "Input the student height.".center(50)
       height = gets.chomp
 
       # Make Hash
@@ -97,73 +166,7 @@ def print(students)
     end
 
     # Puts the line
-    puts line
-  end
-end
-
-# Student While
-def print_while(students)
-
-  # Counter
-  max_counter = students.length
-
-
-  while max_counter > 0
-
-    # Lower Counter
-    max_counter -= 1
-
-    # Get the number
-    num = students.length - max_counter
-
-    # Puts the line
-    puts num.to_s + ". name: " + students.reverse[max_counter] + " cohort: november"
-  end
-end
-
-# Student First Character Filter
-def print_char_filter(students)
-
-  # Get char to search for
-  puts "Input character to search for."
-  char = gets.chomp
-
-  # Start Loop
-  students.each do |name|
-
-    # Char?
-    if name[0] = char
-      # Get the number
-      num = students.find_index(name) + 1
-
-      # Puts the line
-      puts num.to_s + ". name: " + name + " cohort: november"
-    end
-
-  # End Loop
-  end
-end
-
-# Student Length Filter
-def print_length_filter(students)
-
-  # Get char to search for
-  puts "Input length to be less than or equal to."
-  char = gets.chomp.to_i
-
-  # Start Loop
-  students.each do |name|
-
-    # Char?
-    if name.length <= char
-      # Get the number
-      num = students.find_index(name) + 1
-
-      # Puts the line
-      puts num.to_s + ". name: " + name + " cohort: november"
-    end
-
-  # End Loop
+    puts line.center(50)
   end
 end
 
@@ -171,7 +174,7 @@ end
 # Print
 def print_footer(students)
   student_count = students.length
-  puts "Overall, we have #{student_count} great students"
+  puts "Overall, we have #{student_count} great students".center(50)
 end
 
 # Run our code
