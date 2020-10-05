@@ -67,6 +67,37 @@ def print_length_filter(students)
 end
 =end
 
+# DEFINE PRINT COHORT
+def print_cohort(students)
+  # Cohort Array
+  cohort = []
+
+  # Grab Cohorts
+  students.each do |hash|
+
+    # Add to array if not include
+    if !(cohort.include? (hash[:cohort]))
+      cohort.push(hash[:cohort])
+    end
+
+  # End students
+  end
+
+  # Cohort Cycle
+  cohort.each do |name|
+
+    # Title Puts
+    puts name.center(50, '-')
+
+    # Student Loop
+    students.each do |hash|
+      if hash[:cohort] == name
+        puts hash[:name]
+      end
+    end
+  end
+end
+
 # DEFINE METHOD
 def print_header
   puts "The students of Villains Academy".center(50, '~')
@@ -258,5 +289,6 @@ end
 # Run our code
 print_header
 array = input_students
-print(array)
+#print(array)
+print_cohort(array)
 print_footer(array)
