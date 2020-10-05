@@ -16,13 +16,15 @@ def print(students)
   end
 end
 
-# Student First Character
-def print_first_char(students)
-  students.each do |name|
+# Student First Character Filter
+def print_char_filter(students)
 
-    # Get char to search for
-    puts "Input character to search for."
-    char = gets.chomp
+  # Get char to search for
+  puts "Input character to search for."
+  char = gets.chomp
+
+  # Start Loop
+  students.each do |name|
 
     # Char?
     if name[0] = char
@@ -32,6 +34,31 @@ def print_first_char(students)
       # Puts the line
       puts num.to_s + ". name: " + name + " cohort: november"
     end
+
+  # End Loop
+  end
+end
+
+# Student Length Filter
+def print_length_filter(students)
+
+  # Get char to search for
+  puts "Input length to be less than or equal to."
+  char = gets.chomp.to_i
+
+  # Start Loop
+  students.each do |name|
+
+    # Char?
+    if name.length <= char
+      # Get the number
+      num = students.find_index(name) + 1
+
+      # Puts the line
+      puts num.to_s + ". name: " + name + " cohort: november"
+    end
+
+  # End Loop
   end
 end
 
@@ -74,5 +101,5 @@ end
 # Run our code
 array = input_students
 print_header
-print_first_char(array)
+print_length_filter(array)
 print_footer(array)
