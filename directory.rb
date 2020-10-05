@@ -67,13 +67,13 @@ def print_length_filter(students)
 end
 =end
 
-# Header Method
+# DEFINE METHOD
 def print_header
   puts "The students of Villains Academy".center(50, '~')
   puts "-------------".center(50)
 end
 
-# Input Students Method
+# DEFINE INPUT STUDENTS
 def input_students
 
   # Make Array
@@ -140,7 +140,7 @@ def input_students
   return students
 end
 
-# Student Normal
+# DEFINE PRINT NORMAL
 def print(students)
 
   # Loop Over Array
@@ -155,9 +155,11 @@ def print(students)
     # Loop Over Hash
     hash.each do |key, value|
 
-      # Add to line
+      # Add to line, if it isnt an array.
       if value.is_a? String
         line = line + key.to_s + ": " + value.to_s + ", "
+
+      # We have to join arrays.
       else
         line = line + key.to_s + ": " + value.join(", ") + ", "
       end
@@ -165,18 +167,21 @@ def print(students)
     # End Loop Hash
     end
 
-    # Correct Check
-    puts "Would you like to make changes? y/n".center(50)
-    ans = gets.chomp
-
-    # Correct?
-    if ans.downcase == "y"
-      changes(students)
-    end
-
     # Puts the line
     puts line.center(50)
+
+  # End Array Loop
   end
+
+  # Correct Check
+  puts "Would you like to make changes? y/n".center(50)
+  ans = gets.chomp
+
+  # Correct?
+  if ans.downcase == "y"
+    changes(students)
+  end
+
 end
 
 # DEFINE CHANGE
@@ -190,13 +195,41 @@ def changes(students)
   students.each do |hash|
     if hash[:name] == name
 
-      # Display them the menu, grab return
+      # Display them the menu, process
       select = edit_menu
 
+      case select
+
+      when 1
+        puts "Write new Name"
+        hash[:name] = gets.chomp
+      when 2
+        puts "Write new Cohort"
+        hash[:cohort] = gets.chomp
+      when 3
+        puts "Write new Hobbies"
+        hash[:hobbies] = gets.chomp
+      when 4
+        puts "Write new Country"
+        hash[:country] = gets.chomp
+      when 5
+        puts "Write new Height"
+        hash[:height] = gets.chomp
+
+      # Case End
+      end
+    # Name Check End
     end
+  # Loop Hashes End
   end
+
+  # Print students again
+  print(students)
+
+# Method End
 end
 
+# DEFINE EDIT MENU
 def edit_menu
 
   while true
