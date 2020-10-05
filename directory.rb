@@ -1,6 +1,3 @@
-# Set variable
-student_count = 11
-
 # Header Method
 def print_header
   puts "The students of Villains Academy"
