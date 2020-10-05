@@ -7,7 +7,7 @@ end
 # Footer Method
 def print(students)
   students.each do |name|
-    puts name
+    puts "name: " + name + " cohort: november"
   end
 end
 
