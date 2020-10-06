@@ -43,6 +43,11 @@ def print_header
   puts "-------------".center(50)
 end
 
+def ask(text = '')
+  puts "#{text}".center(50)
+  return STDIN.gets.chomp
+end
+
 # DEFINE INPUT STUDENTS
 def input_students()
 
@@ -51,29 +56,24 @@ def input_students()
 
     # Ask for input
     puts "Input the student name.".center(50)
-    puts "To finish, hit return twice".center(50)
 
     # Get input
-    name = STDIN.gets.chomp
+    name = ask("To finish, hit return twice")
 
     # If they enter a name, save the name
     if name != ""
 
       # Cohort
-      puts "Input the student cohort.".center(50)
-      cohort = STDIN.gets.chomp
+      cohort = ask("Input the student cohort.")
 
       # hobbies
-      puts "Input the hobby value. (seperated by '-')".center(50)
-      hobby = STDIN.gets.chomp
+      hobby = ask("Input the hobby value. (seperated by '-')")
 
       # Country
-      puts "Input the student country.".center(50)
-      country = STDIN.gets.chomp
+      country = ask("Input the student country.")
 
       # Height
-      puts "Input the student height.".center(50)
-      height = STDIN.gets.chomp
+      height = ask("Input the student height.")
 
       # Make Hash
       hash = {
@@ -133,9 +133,7 @@ def print_names()
   end
 
   # Correct Check
-  ans = ""
-  puts "Would you like to make changes? y/n".center(50)
-  ans = STDIN.gets.chomp
+  ans = ask("Would you like to make changes? y/n")
 
   # Correct?
   if ans.downcase == "y"
@@ -151,7 +149,7 @@ def changes()
 
   # Get the name reference
   puts "Enter name reference.".center(50, '~')
-  name = STDIN.gets.chomp
+  name = ask()
 
   # Loop to find our hash
   @students.each do |hash|
@@ -163,20 +161,15 @@ def changes()
       case select
 
       when 1
-        puts "Write new Name"
-        hash[:name] = STDIN.gets.chomp
+        hash[:name] = ask("Write new Name")
       when 2
-        puts "Write new Cohort"
-        hash[:cohort] = STDIN.gets.chomp
+        hash[:cohort] = ask("Write new Cohort")
       when 3
-        puts "Write new Hobbies"
-        hash[:hobbies] = STDIN.gets.chomp
+        hash[:hobbies] = ask("Write new Hobbies")
       when 4
-        puts "Write new Country"
-        hash[:country] = STDIN.gets.chomp
+        hash[:country] = ask("Write new Country")
       when 5
-        puts "Write new Height"
-        hash[:height] = STDIN.gets.chomp
+        hash[:height] = ask("Write new Height")
 
       # Case End
       end
@@ -191,18 +184,24 @@ def changes()
 # Method End
 end
 
+# DEFINE EDIT PRINT
+def edit_print
+  # Print a nice menu
+  puts "Submit a number for the change".center(50)
+  puts "1. Name"
+  puts "2. Cohort"
+  puts "3. Hobbies"
+  puts "4. Country"
+  puts "5. Height"
+end
+
 # DEFINE EDIT MENU
 def edit_menu
 
   while true
-    # Print a nice menu
-    puts "Submit a number for the change".center(50)
-    puts "1. Name"
-    puts "2. Cohort"
-    puts "3. Hobbies"
-    puts "4. Country"
-    puts "5. Height"
-    selection = STDIN.gets.chomp.to_i
+
+    edit_print
+    selection = ask().to_i
 
     # return
     if (selection <= 5) and (selection > 0)
@@ -220,7 +219,7 @@ def print_footer()
     puts "Overall, we have #{student_count} great students".center(50)
 
   # Grammer None
-elsif student_count == 0
+  elsif student_count == 0
     puts "Overall, we have no students".center(50)
 
   # Grammar Singular
@@ -316,13 +315,12 @@ def interactive_menu()
     interactive_print
 
     # Ask for input
-    process(STDIN.gets.chomp.to_i)
+    process(ask().to_i)
 
   end
 end
 
 # RUN CODE
-# If the file , load it
 load_students
 
 # Start Main Script
