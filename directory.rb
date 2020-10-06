@@ -1,4 +1,4 @@
-=begin
+
 # Student While
 def print_while(students)
 
@@ -65,7 +65,6 @@ def print_length_filter(students)
   # End Loop
   end
 end
-=end
 
 # DEFINE PRINT COHORT
 def print_cohort(students)
@@ -299,9 +298,33 @@ elsif student_count == 0
 
 end
 
-# Run our code
-print_header
-array = input_students
-#print(array)
-print_cohort(array)
-print_footer(array)
+def interactive_menu(students = [])
+
+  loop do
+    puts "Please select your option.".center(50,'~')
+    puts "1. Input Students".center(50)
+    puts "2. Show the Students".center(50)
+    puts "9. Exit".center(50)
+
+    # Ask for input
+    answer = gets.chomp.to_i
+
+    case answer
+
+    when 1
+      print_header
+      students = input_students
+      #print(array)
+      print_cohort(students)
+      print_footer(students)
+    when 2
+      print_header
+      print_cohort(students)
+      print_footer(students)
+    when 9
+      break
+    end
+  end
+end
+
+interactive_menu
