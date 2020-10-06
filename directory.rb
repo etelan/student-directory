@@ -1,38 +1,41 @@
+# Instance Variable
+@students = []
+
 
 # Student While
-def print_while(students)
+def print_while()
 
   # Counter
-  max_counter = students.length
+  max_counter = @students.length
 
-
+  # While not fully printed
   while max_counter > 0
 
     # Lower Counter
     max_counter -= 1
 
-    # Get the number
-    num = students.length - max_counter
+    # Get the index
+    num = @students.length - max_counter
 
     # Puts the line
-    puts num.to_s + ". name: " + students.reverse[max_counter] + " cohort: november"
+    puts num.to_s + ". name: " + @students.reverse[max_counter] + " cohort: november"
   end
 end
 
 # Student First Character Filter
-def print_char_filter(students)
+def print_char_filter()
 
   # Get char to search for
   puts "Input character to search for."
   char = gets.chomp
 
   # Start Loop
-  students.each do |name|
+  @students.each do |name|
 
     # Char?
     if name[0] = char
       # Get the number
-      num = students.find_index(name) + 1
+      num = @students.find_index(name) + 1
 
       # Puts the line
       puts num.to_s + ". name: " + name + " cohort: november"
@@ -44,19 +47,19 @@ end
 
 
 # Student Length Filter
-def print_length_filter(students)
+def print_length_filter()
 
   # Get char to search for
   puts "Input length to be less than or equal to."
   char = gets.chomp.to_i
 
   # Start Loop
-  students.each do |name|
+  @students.each do |name|
 
     # Char?
     if name.length <= char
       # Get the number
-      num = students.find_index(name) + 1
+      num = @students.find_index(name) + 1
 
       # Puts the line
       puts num.to_s + ". name: " + name + " cohort: november"
@@ -67,19 +70,19 @@ def print_length_filter(students)
 end
 
 # DEFINE PRINT COHORT
-def print_cohort(students)
+def print_cohort()
   # Cohort Array
   cohort = []
 
   # Grab Cohorts
-  students.each do |hash|
+  @students.each do |hash|
 
     # Add to array if not include
     if !(cohort.include? (hash[:cohort]))
       cohort.push(hash[:cohort])
     end
 
-  # End students
+  # End @students
   end
 
   # Cohort Cycle
@@ -89,7 +92,7 @@ def print_cohort(students)
     puts name.center(50, '-')
 
     # Student Loop
-    students.each do |hash|
+    @students.each do |hash|
       if hash[:cohort] == name
         puts hash[:name]
       end
@@ -104,10 +107,7 @@ def print_header
 end
 
 # DEFINE INPUT STUDENTS
-def input_students
-
-  # Make Array
-  students = []
+def input_students()
 
   # Start Loop
   while true
@@ -157,7 +157,7 @@ def input_students
       }
 
       # Push
-      students.push(hash)
+      @students.push(hash)
 
     else
       break
@@ -167,17 +167,17 @@ def input_students
   end
 
   # Return Array
-  return students
+  return @students
 end
 
 # DEFINE PRINT NORMAL
-def print(students)
+def print()
 
   # Loop Over Array
-  students.each do |hash|
+  @students.each do |hash|
 
     # Get the number
-    num = students.find_index(hash) + 1
+    num = @students.find_index(hash) + 1
 
     # Start String
     line = num.to_s + ". "
@@ -209,20 +209,20 @@ def print(students)
 
   # Correct?
   if ans.downcase == "y"
-    changes(students)
+    changes()
   end
 
 end
 
 # DEFINE CHANGE
-def changes(students)
+def changes()
 
   # Get the name reference
   puts "Enter name reference.".center(50, '~')
   name = gets.chomp
 
   # Loop to find our hash
-  students.each do |hash|
+  @students.each do |hash|
     if hash[:name] == name
 
       # Display them the menu, process
@@ -253,8 +253,8 @@ def changes(students)
   # Loop Hashes End
   end
 
-  # Print students again
-  print(students)
+  # Print @students again
+  print()
 
 # Method End
 end
@@ -279,9 +279,9 @@ def edit_menu
   end
 end
 
-# Print
-def print_footer(students)
-  student_count = students.length
+# DEFINE PRINT
+def print_footer()
+  student_count = @students.length
 
   # Grammar Plural
   if student_count > 1
@@ -298,7 +298,8 @@ elsif student_count == 0
 
 end
 
-def interactive_menu(students = [])
+# DEFINE INTERACTIVE MENU
+def interactive_menu()
 
   loop do
     puts "Please select your option.".center(50,'~')
@@ -313,14 +314,14 @@ def interactive_menu(students = [])
 
     when 1
       print_header
-      students = input_students
+      students = input_students()
       #print(array)
-      print_cohort(students)
-      print_footer(students)
+      print_cohort()
+      print_footer()
     when 2
       print_header
-      print_cohort(students)
-      print_footer(students)
+      print_cohort()
+      print_footer()
     when 9
       break
     end
