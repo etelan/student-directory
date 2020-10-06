@@ -1,7 +1,7 @@
 # Instance Variable
 @students = []
 
-
+#-----------------UNUSED-----------------
 # Student While
 def print_while()
 
@@ -68,6 +68,8 @@ def print_length_filter()
   # End Loop
   end
 end
+
+#-----------------END-----------------
 
 # DEFINE PRINT COHORT
 def print_cohort()
@@ -171,7 +173,7 @@ def input_students()
 end
 
 # DEFINE PRINT NORMAL
-def print()
+def print_names()
 
   # Loop Over Array
   @students.each do |hash|
@@ -298,33 +300,44 @@ elsif student_count == 0
 
 end
 
+# DEFINE PROCESS
+def process(selection)
+  case selection
+  when 1
+    input_students
+  when 2
+    show_students
+  when 9
+    exit
+  end
+end
+
+# DEFINE SHOW STUDENTS
+def show_students
+  print_header
+  print_names
+  print_footer
+end
+
+# DEFINE INTERACTIVE PRINT
+def interactive_print
+  puts "Please select your option.".center(50,'~')
+  puts "1. Input Students".center(50)
+  puts "2. Show the Students".center(50)
+  puts "9. Exit".center(50)
+end
+
 # DEFINE INTERACTIVE MENU
 def interactive_menu()
 
   loop do
-    puts "Please select your option.".center(50,'~')
-    puts "1. Input Students".center(50)
-    puts "2. Show the Students".center(50)
-    puts "9. Exit".center(50)
+
+    # Print Options
+    interactive_print
 
     # Ask for input
-    answer = gets.chomp.to_i
+    process(gets.chomp.to_i)
 
-    case answer
-
-    when 1
-      print_header
-      students = input_students()
-      #print(array)
-      print_cohort()
-      print_footer()
-    when 2
-      print_header
-      print_cohort()
-      print_footer()
-    when 9
-      break
-    end
   end
 end
 
