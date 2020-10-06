@@ -1,5 +1,5 @@
 # Instance Variable
-@students = []
+@students = [{:name => "name", :cohort => "cohort", :country => "country", :hobby => "hobby", :height => "height"}]
 
 #-----------------UNUSED-----------------
 # Student While
@@ -128,18 +128,9 @@ def input_students()
       puts "Input the student cohort.".center(50)
       cohort = gets.chomp
 
-      # Hobby num
-      puts "Input the number of student hobbies.".center(50)
-      hobbies_num = gets.chomp.to_i
-
-      # Hobby array
-      hobby = []
-
-      (1..hobbies_num).each do |i|
-        # Hobby Value
-        puts "Input the hobby value.".center(50)
-        hobby.push(gets.chomp)
-      end
+      # hobbies
+      puts "Input the hobby value. (seperated by '-')".center(50)
+      hobby = gets.chomp
 
       # Country
       puts "Input the student country.".center(50)
@@ -179,28 +170,33 @@ def print_names()
   @students.each do |hash|
 
     # Get the number
-    num = @students.find_index(hash) + 1
+    num = @students.find_index(hash)
 
     # Start String
     line = num.to_s + ". "
 
-    # Loop Over Hash
-    hash.each do |key, value|
+    # Make sure we dont print our title
+    if num > 0
 
-      # Add to line, if it isnt an array.
-      if value.is_a? String
-        line = line + key.to_s + ": " + value.to_s + ", "
+      # Loop Over Hash
+      hash.each do |key, value|
 
-      # We have to join arrays.
-      else
-        line = line + key.to_s + ": " + value.join(", ") + ", "
+        # Add to line, if it isnt an array.
+        if value.is_a? String
+          line = line + key.to_s + ": " + value.to_s + ", "
+
+        # We have to join arrays.
+        else
+          line = line + key.to_s + ": " + value.join(", ") + ", "
+        end
+
+      # End Loop Hash
       end
 
-    # End Loop Hash
-    end
+      # Puts the line
+      puts line.center(50)
 
-    # Puts the line
-    puts line.center(50)
+    end
 
   # End Array Loop
   end
@@ -283,7 +279,7 @@ end
 
 # DEFINE PRINT
 def print_footer()
-  student_count = @students.length
+  student_count = @students.length - 1
 
   # Grammar Plural
   if student_count > 1
@@ -319,28 +315,23 @@ def save_students
 
   # Open File
   file = File.open("students.csv", "w")
-  file_hobbies = File.open("students_hobbies.csv", "w")
 
   # Loop Hash
   @students.each do |hash|
 
     # Arrays to save
-    student_data = [hash[:name], hash[:cohort],
+    student_data = [hash[:name], hash[:cohort], hash[:hobby],
     hash[:country], hash[:height]]
-    student_hobbies = [hash[:name], hash[:hobby]]
 
     # Lines to write
     csv_line = student_data.join(',')
-    csv_line2 = student_hobbies.join(',')
 
     # Save them
     file.puts csv_line
-    file_hobbies.puts csv_line2
   end
 
   # Close File
   file.close
-  file_hobbies.close
 end
 
 
@@ -349,6 +340,20 @@ def show_students
   print_header
   print_names
   print_footer
+end
+
+# DEFINE LOAD STUDENTS
+def load_students
+  # Open File
+  file = File.open("students.csv", "r")
+
+  # READ Student.csv
+  file.readlines.each do |line|
+    # Set Student Variables
+    name, cohort, hobby, country, height = line.chomp.split(',')
+    @students << {:name => name, :cohort => cohort, :country => country, :hobby => hobby, :height => height}
+  end
+  file.close
 end
 
 # DEFINE INTERACTIVE PRINT
@@ -374,4 +379,6 @@ def interactive_menu()
   end
 end
 
+# Code Run
+load_students
 interactive_menu
