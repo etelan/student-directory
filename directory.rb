@@ -1,6 +1,9 @@
-# Instance Variable
-@students = [{:name => "name", :cohort => "cohort", :country => "country", :hobby => "hobby", :height => "height"}]
-
+# Instance Variable Initialize
+if !(File.exists?("students.csv"))
+  @students = [{:name => "name", :cohort => "cohort", :country => "country", :hobby => "hobby", :height => "height"}]
+else
+  @students = []
+end
 #-----------------UNUSED-----------------
 # Student While
 def print_while()
@@ -170,7 +173,7 @@ def print_names()
   @students.each do |hash|
 
     # Get the number
-    num = @students.find_index(hash) -1
+    num = @students.find_index(hash)
 
     # Start String
     line = num.to_s + ". "
@@ -377,6 +380,11 @@ def interactive_menu()
   end
 end
 
-# Code Run
-load_students
+# RUN CODE
+# If the file exists, load it
+if File.file?("students.csv")
+  load_students
+end
+
+# Start Main Script
 interactive_menu
