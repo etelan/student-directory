@@ -170,7 +170,7 @@ def print_names()
   @students.each do |hash|
 
     # Get the number
-    num = @students.find_index(hash)
+    num = @students.find_index(hash) -1
 
     # Start String
     line = num.to_s + ". "
@@ -178,16 +178,12 @@ def print_names()
     # Make sure we dont print our title
     if num > 0
 
-      # Loop Over Hash
+      # Loop Over Hash, print line
       hash.each do |key, value|
-
-        # Add to line, if it isnt an array.
-        if value.is_a? String
-          line = line + key.to_s + ": " + value.to_s + ", "
-
-        # We have to join arrays.
+        if key == :height
+          line = line + key.to_s + ": " + value.to_s + " "
         else
-          line = line + key.to_s + ": " + value.join(", ") + ", "
+          line = line + key.to_s + ": " + value.to_s + ", "
         end
 
       # End Loop Hash
@@ -202,12 +198,15 @@ def print_names()
   end
 
   # Correct Check
+  ans = ""
   puts "Would you like to make changes? y/n".center(50)
   ans = gets.chomp
 
   # Correct?
   if ans.downcase == "y"
     changes()
+  else
+    print_footer
   end
 
 end
@@ -252,7 +251,7 @@ def changes()
   end
 
   # Print @students again
-  print()
+  print_names()
 
 # Method End
 end
@@ -339,7 +338,6 @@ end
 def show_students
   print_header
   print_names
-  print_footer
 end
 
 # DEFINE LOAD STUDENTS
