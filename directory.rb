@@ -1,78 +1,10 @@
+
 # Instance Variable Initialize
-if !(File.exists?("students.csv"))
+if !(File.file?("students.csv")) and !(File.file?(ARGV.first.to_s))
   @students = [{:name => "name", :cohort => "cohort", :country => "country", :hobby => "hobby", :height => "height"}]
 else
   @students = []
 end
-#-----------------UNUSED-----------------
-# Student While
-def print_while()
-
-  # Counter
-  max_counter = @students.length
-
-  # While not fully printed
-  while max_counter > 0
-
-    # Lower Counter
-    max_counter -= 1
-
-    # Get the index
-    num = @students.length - max_counter
-
-    # Puts the line
-    puts num.to_s + ". name: " + @students.reverse[max_counter] + " cohort: november"
-  end
-end
-
-# Student First Character Filter
-def print_char_filter()
-
-  # Get char to search for
-  puts "Input character to search for."
-  char = gets.chomp
-
-  # Start Loop
-  @students.each do |name|
-
-    # Char?
-    if name[0] = char
-      # Get the number
-      num = @students.find_index(name) + 1
-
-      # Puts the line
-      puts num.to_s + ". name: " + name + " cohort: november"
-    end
-
-  # End Loop
-  end
-end
-
-
-# Student Length Filter
-def print_length_filter()
-
-  # Get char to search for
-  puts "Input length to be less than or equal to."
-  char = gets.chomp.to_i
-
-  # Start Loop
-  @students.each do |name|
-
-    # Char?
-    if name.length <= char
-      # Get the number
-      num = @students.find_index(name) + 1
-
-      # Puts the line
-      puts num.to_s + ". name: " + name + " cohort: november"
-    end
-
-  # End Loop
-  end
-end
-
-#-----------------END-----------------
 
 # DEFINE PRINT COHORT
 def print_cohort()
@@ -122,26 +54,26 @@ def input_students()
     puts "To finish, hit return twice".center(50)
 
     # Get input
-    name = gets.chomp
+    name = STDIN.gets.chomp
 
     # If they enter a name, save the name
     if name != ""
 
       # Cohort
       puts "Input the student cohort.".center(50)
-      cohort = gets.chomp
+      cohort = STDIN.gets.chomp
 
       # hobbies
       puts "Input the hobby value. (seperated by '-')".center(50)
-      hobby = gets.chomp
+      hobby = STDIN.gets.chomp
 
       # Country
       puts "Input the student country.".center(50)
-      country = gets.chomp
+      country = STDIN.gets.chomp
 
       # Height
       puts "Input the student height.".center(50)
-      height = gets.chomp
+      height = STDIN.gets.chomp
 
       # Make Hash
       hash = {
@@ -203,7 +135,7 @@ def print_names()
   # Correct Check
   ans = ""
   puts "Would you like to make changes? y/n".center(50)
-  ans = gets.chomp
+  ans = STDIN.gets.chomp
 
   # Correct?
   if ans.downcase == "y"
@@ -219,7 +151,7 @@ def changes()
 
   # Get the name reference
   puts "Enter name reference.".center(50, '~')
-  name = gets.chomp
+  name = STDIN.gets.chomp
 
   # Loop to find our hash
   @students.each do |hash|
@@ -232,19 +164,19 @@ def changes()
 
       when 1
         puts "Write new Name"
-        hash[:name] = gets.chomp
+        hash[:name] = STDIN.gets.chomp
       when 2
         puts "Write new Cohort"
-        hash[:cohort] = gets.chomp
+        hash[:cohort] = STDIN.gets.chomp
       when 3
         puts "Write new Hobbies"
-        hash[:hobbies] = gets.chomp
+        hash[:hobbies] = STDIN.gets.chomp
       when 4
         puts "Write new Country"
-        hash[:country] = gets.chomp
+        hash[:country] = STDIN.gets.chomp
       when 5
         puts "Write new Height"
-        hash[:height] = gets.chomp
+        hash[:height] = STDIN.gets.chomp
 
       # Case End
       end
@@ -270,7 +202,7 @@ def edit_menu
     puts "3. Hobbies"
     puts "4. Country"
     puts "5. Height"
-    selection = gets.chomp.to_i
+    selection = STDIN.gets.chomp.to_i
 
     # return
     if (selection <= 5) and (selection > 0)
@@ -316,7 +248,11 @@ end
 def save_students
 
   # Open File
-  file = File.open("students.csv", "w")
+  if !(ARGV.empty?)
+    file = File.open(ARGV.first, "w")
+  else
+    file = File.open("students.csv", "w")
+  end
 
   # Loop Hash
   @students.each do |hash|
@@ -345,8 +281,13 @@ end
 
 # DEFINE LOAD STUDENTS
 def load_students
+
   # Open File
-  file = File.open("students.csv", "r")
+  if !(ARGV.empty?)
+    file = File.open(ARGV.first, "r")
+  else
+    file = File.open("students.csv", "r")
+  end
 
   # READ Student.csv
   file.readlines.each do |line|
@@ -375,16 +316,14 @@ def interactive_menu()
     interactive_print
 
     # Ask for input
-    process(gets.chomp.to_i)
+    process(STDIN.gets.chomp.to_i)
 
   end
 end
 
 # RUN CODE
-# If the file exists, load it
-if File.file?("students.csv")
-  load_students
-end
+# If the file , load it
+load_students
 
 # Start Main Script
 interactive_menu
