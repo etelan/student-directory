@@ -239,6 +239,7 @@ def process(selection)
   when 3
     save_students
   when 9
+    puts "Exiting..."
     exit
   end
 end
@@ -269,6 +270,7 @@ def save_students
 
   # Close File
   file.close
+  puts "Saved."
 end
 
 
