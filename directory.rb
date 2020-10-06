@@ -307,10 +307,42 @@ def process(selection)
     input_students
   when 2
     show_students
+  when 3
+    save_students
   when 9
     exit
   end
 end
+
+# DEFINE SAVE GENERAL
+def save_students
+
+  # Open File
+  file = File.open("students.csv", "w")
+  file_hobbies = File.open("students_hobbies.csv", "w")
+
+  # Loop Hash
+  @students.each do |hash|
+
+    # Arrays to save
+    student_data = [hash[:name], hash[:cohort],
+    hash[:country], hash[:height]]
+    student_hobbies = [hash[:name], hash[:hobby]]
+
+    # Lines to write
+    csv_line = student_data.join(',')
+    csv_line2 = student_hobbies.join(',')
+
+    # Save them
+    file.puts csv_line
+    file_hobbies.puts csv_line2
+  end
+
+  # Close File
+  file.close
+  file_hobbies.close
+end
+
 
 # DEFINE SHOW STUDENTS
 def show_students
@@ -324,6 +356,7 @@ def interactive_print
   puts "Please select your option.".center(50,'~')
   puts "1. Input Students".center(50)
   puts "2. Show the Students".center(50)
+  puts "3. Save the Students".center(50)
   puts "9. Exit".center(50)
 end
 
