@@ -1,12 +1,6 @@
 # CSV Import
 require 'csv'
-
-# Instance Variable Initialize
-if !(File.file?("students.csv")) and !(File.file?(ARGV.first.to_s))
-  @students = [{:name => "name", :cohort => "cohort", :country => "country", :hobby => "hobby", :height => "height"}]
-else
-  @students = []
-end
+@students = [{:name => "name", :cohort => "cohort", :country => "country", :hobby => "hobby", :height => "height"}]
 
 # DEFINE METHOD
 def print_header
@@ -76,8 +70,8 @@ def print_names()
   @students.each do |hash|
 
       if hash[:name] != 'name'
-        puts "name: " + hash[:name] + ", cohort: " + hash[:cohort] +
-        ", hobbies: " + hash[:hobby] + ", country: " + hash[:country]
+        puts "name: " + hash[:name].to_s + ", cohort: " + hash[:cohort].to_s +
+        ", hobbies: " + hash[:hobby].to_s + ", country: " + hash[:country].to_s
       end
 
   # End Array Loop
@@ -155,7 +149,7 @@ def edit_menu
     selection = ask().to_i
 
     # return
-    if (selection <= 5) and (selection > 0)
+    if (selection <= 5) && (selection > 0)
       return selection
     end
   end
@@ -163,7 +157,7 @@ end
 
 # DEFINE PRINT
 def print_footer()
-  student_count = @students.length - 1
+  student_count = @students.length
 
   # Grammar Plural
   if student_count > 1
@@ -231,12 +225,15 @@ def load_students
 
   # Open File, set our headers
   if !(ARGV.empty?)
-    table = CSV.parse(File.read(ARGV.first), write_headers: true, :headers => ["name","cohort","country", "hobby", "height"])
+    table = CSV.parse(File.read(ARGV.first), write_headers: true, :headers => ['name','cohort','hobby', 'country', 'height'])
   else
-    table = CSV.parse(File.read("students.csv"), write_headers: true, :headers => ["name","cohort","country", "hobby", "height"])
+    table = CSV.parse(File.read("students.csv"), write_headers: true, :headers => ['name','cohort','hobby', 'country', 'height'])
   end
 
-  (0...table.length).each do |num|
+
+  # puts just name,cohort,hobby,country,height
+
+  for num in 0..(table.length - 1) do
     # Set Student Variable
     @students << {:name => table[num]['name'],
       :cohort => table[num]['cohort'], :country => table[num]['country'],
@@ -269,7 +266,7 @@ def interactive_menu()
 end
 
 # RUN CODE
-if (File.file?("students.csv")) or (File.file?(ARGV.first.to_s))
+if (File.file?("students.csv")) || (File.file?(ARGV.first.to_s))
   load_students
 end
 
